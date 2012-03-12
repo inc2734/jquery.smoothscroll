@@ -22,7 +22,9 @@
 					// Safari = body, others = html
 					// スクロールしていない状態だとhtmlもbodyもscrollTop 0を返すので、1pxずらしてから計測。
 					var wst = $(window).scrollTop();
-					$(window).scrollTop( wst + 1 );
+					if ( wst <= 0 ) {
+						$(window).scrollTop( wst + 1 );
+					}
 					if ( $('html').scrollTop() > 0 ) {
 						var targetBody = $('html');
 					} else if ( $('body').scrollTop() > 0 ) {
