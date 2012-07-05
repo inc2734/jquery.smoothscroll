@@ -2,10 +2,10 @@
  * Plugin Name: jquery.SmoothScroll
  * Plugin URI: http://2inc.org
  * Description: スムーススクロールでページ内移動するためのプラグイン。指定要素のhashをもとに移動する。
- * Version: 0.3.2
+ * Version: 0.3.3
  * Author: Takashi Kitajima
  * Author URI: http://2inc.org
- * modified : July 1, 2012
+ * modified : July 5, 2012
  * License: GPL2
  * 
  * easing : http://jqueryui.com/demos/effect/easing.html
@@ -33,48 +33,46 @@
 			easing : 'easeOutQuint'
 		};
 		config = $.extend( defaults, config );
-		return this.each( function( i, elem ) {
-			var animateFlg = true;
+		var animateFlg = true;
+		$(this).live( 'click', function() {
 			if ( animateFlg == true ) {
-				$(elem).click( function() {
-					animateFlg = false;
-					var targetHash = this.hash;
-					var offset = $(targetHash).eq(0).offset();
-					if ( targetHash && offset !== null ) {
-						var targetPosition = offset.top;
-						var wst = $(window).scrollTop();
-						if ( wst === 0 ) {
-							$(window).scrollTop( wst + 1 );
-						}
-						var targetBody = getTargetBody();
-						if ( typeof targetBody !== 'undefined' ) {
-							targetBody.animate(
-								{
-									scrollTop : targetPosition
-								},
-								config.duration,
-								config.easing,
-								function() {
-									animateFlg = true;
-									location.hash = targetHash;
-								}
-							);
-							
-							var scrollStop = function() {
-								if ( animateFlg ) {
-									targetBody.stop();
-								}
-								animateFlg = true;
-							};
-							if ( window.addEventListener ) {
-								window.addEventListener( 'DOMMouseScroll', scrollStop, false );
-							}
-							window.onmousewheel = document.onmousewheel = scrollStop;
-						}
+				animateFlg = false;
+				var targetHash = this.hash;
+				var offset = $(targetHash).eq(0).offset();
+				if ( targetHash && offset !== null ) {
+					var targetPosition = offset.top;
+					var wst = $(window).scrollTop();
+					if ( wst === 0 ) {
+						$(window).scrollTop( wst + 1 );
 					}
-					return false;
-				});
+					var targetBody = getTargetBody();
+					if ( typeof targetBody !== 'undefined' ) {
+						targetBody.animate(
+							{
+								scrollTop : targetPosition
+							},
+							config.duration,
+							config.easing,
+							function() {
+								animateFlg = true;
+								location.hash = targetHash;
+							}
+						);
+						
+						var scrollStop = function() {
+							if ( animateFlg ) {
+								targetBody.stop( true );
+							}
+							animateFlg = true;
+						};
+						if ( window.addEventListener ) {
+							window.addEventListener( 'DOMMouseScroll', scrollStop, false );
+						}
+						window.onmousewheel = document.onmousewheel = scrollStop;
+					}
+				}
 			}
+			return false;
 		});
 		
 		function getTargetBody() {
@@ -89,12 +87,18 @@
 })( jQuery );
 
 jQuery( function( $ ) {
+	$('a[href^="#"]').SmoothScroll({
+		duration : 1000,
+		easing : 'easeOutQuint'
+	});
+	/*
 	$('a[href^="#"]').live( 'hover', function() {
 		$(this).SmoothScroll({
 			duration : 1000,
 			easing : 'easeOutQuint'
 		});
 	});
+	*/
 });
 
 /*
