@@ -2,11 +2,11 @@
  * Plugin Name: jquery.SmoothScroll
  * Plugin URI: http://2inc.org
  * Description: スムーススクロールでページ内移動するためのプラグイン。指定要素のhashをもとに移動する。
- * Version: 0.3.5
+ * Version: 0.4.0
  * Author: Takashi Kitajima
  * Author URI: http://2inc.org
  * Created : July 5, 2012
- * Modified : March 7, 2013
+ * Modified : February 6, 2016
  * License: GPL2
  *
  * easing : http://jqueryui.com/demos/effect/easing.html
@@ -32,7 +32,9 @@
 
 		var defaults = {
 			duration : 1000,
-			easing   : 'easeOutQuint'
+			easing   : 'easeOutQuint',
+			offset   : 0,
+			hash     : true,
 		};
 		params = $.extend( defaults, params );
 
@@ -68,12 +70,14 @@
 					return;
 				targetBody.animate(
 					{
-						scrollTop: offset.top
+						scrollTop: offset.top - params.offset
 					},
 					params.duration,
 					params.easing,
 					function() {
-						location.hash = targetHash;
+						if ( params.hash === true ) {
+							history.pushState( '', '', targetHash );
+						}
 					}
 				);
 
