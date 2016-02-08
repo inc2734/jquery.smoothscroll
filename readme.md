@@ -10,6 +10,7 @@
 
 ## 2.Setting
 
+```javascript
 <script>
 jQuery( function( $ ) {
 	$( 'a[href^="#"]' ).SmoothScroll( {
@@ -18,3 +19,4 @@ jQuery( function( $ ) {
 	} );
 } );
 </script>
+```
