@@ -27,7 +27,7 @@
 					}
 					return targetBody;
 				}
-			}
+			};
 
 			var defaults = {
 				duration: 1000,
@@ -41,7 +41,7 @@
 
 			return this.each( function( i, e ) {
 				$( e ).on( 'click.SmoothScroll', function() {
-					var targetHash = this.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)')
+					var targetHash = this.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)');
 					var offset = $( targetHash ).eq( 0 ).offset();
 					if ( !targetHash || offset === null || typeof offset === 'undefined' )
 						return;
@@ -76,7 +76,7 @@
 		off: function() {
 			$( this ).unbind( 'click.SmoothScroll' );
 		}
-	}
+	};
 
 	$.fn.SmoothScroll = function( method ) {
 		if ( methods[method] ) {
