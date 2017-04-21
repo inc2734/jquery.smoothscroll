@@ -65,9 +65,9 @@ export default class SmoothScroll {
         );
 
         if (window.addEventListener) {
-          window.addEventListener('DOMMouseScroll', methods.scrollStop, false);
+          window.addEventListener('DOMMouseScroll', this._scrollStop, false);
         }
-        window.onmousewheel = document.onmousewheel = methods.scrollStop;
+        window.onmousewheel = document.onmousewheel = this._scrollStop;
       });
     });
   }
