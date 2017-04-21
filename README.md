@@ -19,12 +19,12 @@ $ yarn add jquery.smoothscroll
 
 ```
 <script>
-jQuery( function( $ ) {
-	$( 'a[href^="#"]' ).SmoothScroll( {
-		duration: 1000,
-		easing  : 'easeOutQuint'
-	} );
-} );
+jQuery(function($) {
+  $('a[href^="#"]').SmoothScroll({
+    duration: 1000,
+    easing  : 'easeOutQuint'
+  });
+});
 </script>
 ```
 
