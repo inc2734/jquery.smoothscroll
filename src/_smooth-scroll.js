@@ -2,10 +2,9 @@ import $ from 'jquery';
 
 export default class SmoothScroll {
   constructor(target, params = {}) {
-    this.target     = target;
-    this.targetBody = this._getTargetBody();
+    this.target = target;
 
-    const defaults  = {
+    const defaults = {
       duration: 1000,
       easing  : 'easeOutQuint',
       offset  : 0,
@@ -15,6 +14,11 @@ export default class SmoothScroll {
   }
 
   _getTargetBody() {
+    const wst = $(window).scrollTop();
+    if (0 === wst) {
+      $(window).scrollTop(wst + 1);
+    }
+
     if (0 < $('html').scrollTop()) {
       return $('html');
     } else if (0 < $('body').scrollTop()) {
@@ -22,8 +26,37 @@ export default class SmoothScroll {
     }
   }
 
-  _scrollStop() {
-    this.targetBody.stop(true);
+  _scroll(body) {
+    const targetHash = event.currentTarget.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)');
+    const offset     = $(targetHash).eq(0).offset();
+
+    if (! targetHash || ! offset) {
+      return;
+    }
+
+    body.animate(
+      {
+        scrollTop: offset.top - this.params.offset
+      },
+      this.params.duration,
+      this.params.easing,
+      () => {
+        if (true === this.params.hash) {
+          window.history.pushState('', '', targetHash);
+        }
+      }
+    );
+  }
+
+  _disableMouseWheel(body) {
+    if (window.addEventListener) {
+      window.addEventListener('DOMMouseScroll', () => {
+        body.stop(true);
+      }, false);
+    }
+    window.onmousewheel = document.onmousewheel = function() {
+      body.stop(true);
+    };
   }
 
   off() {
@@ -35,39 +68,13 @@ export default class SmoothScroll {
       $(e).on('click.SmoothScroll', (event) => {
         event.preventDefault();
 
-        const targetHash = event.currentTarget.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)');
-        const offset     = $(targetHash).eq(0).offset();
-
-        if (! this.targetBody) {
+        const body = this._getTargetBody();
+        if (! body) {
           return;
         }
 
-        if (! targetHash || ! offset) {
-          return;
-        }
-
-        const wst = $(window).scrollTop();
-        if (0 === wst) {
-          $(window).scrollTop(wst + 1);
-        }
-
-        this.targetBody.animate(
-          {
-            scrollTop: offset.top - this.params.offset
-          },
-          this.params.duration,
-          this.params.easing,
-          () => {
-            if (true === this.params.hash) {
-              window.history.pushState('', '', targetHash);
-            }
-          }
-        );
-
-        if (window.addEventListener) {
-          window.addEventListener('DOMMouseScroll', this._scrollStop, false);
-        }
-        window.onmousewheel = document.onmousewheel = this._scrollStop;
+        this._scroll(body);
+        this._disableMouseWheel(body);
       });
     });
   }
