@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>jquery.smoothscroll sample page</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: #fff;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0;
+  }
+  .box {
+    padding: 20px;
+  }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="box1" class="box" style="background-color: #eee; height: 500px;">
+    <p>
+      Box1
+    </p>
+    <p>
+      <a href="#box2">Go to Box2</a>
+    </p>
+  </div>
+
+  <div id="box2" class="box" style="background-color: #fff; height: 500px;">
+    <p>
+      Box2
+    </p>
+    <p>
+      <a href="#box1">Go to Box1</a>
+      <a href="#box3">Go to Box3</a>
+    </p>
+  </div>
+
+  <div id="box3" class="box" style="background-color: #000; color: #fff; height: 500px;">
+    <p>
+      Box3
+    </p>
+    <p>
+      <a href="#box2">Go to Box2</a>
+    </p>
+  </div>
+
+  <div class="box">
+    <a href="#container">Back to page top</a>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="jquery.smoothscroll.js"></script>
+<script>
+jQuery(function($) {
+  $('a[href^="#"]').SmoothScroll({
+    duration: 1000,
+    easing  : 'easeOutQuint'
+  });
+});
+</script>
+</body>
+</html>

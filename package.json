@@ -1,0 +1,44 @@
+{
+  "name": "jquery.smoothscroll",
+  "version": "1.0.0",
+  "author": "inc2734",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inc2734/jquery.smoothscroll"
+  },
+  "main": "src/jquery.smoothscroll.js",
+  "keywords": [
+    "scrollbar",
+    "scroll",
+    "smooth scroll"
+  ],
+  "files": [
+    "src",
+    "dist",
+    "package.json",
+    "gulpfile.js",
+    "LICENSE",
+    "README.md",
+    "yarn.lock"
+  ],
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rollup": "^2.11.0",
+    "gulp-uglify": "^2.1.2",
+    "gulp-zip": "^4.0.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "browser-sync": "^2.18.8"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "prepublish": "gulp build",
+    "build": "gulp build",
+    "start": "gulp"
+  }
+}
