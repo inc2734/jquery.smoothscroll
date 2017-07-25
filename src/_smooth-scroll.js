@@ -26,7 +26,7 @@ export default class SmoothScroll {
     }
   }
 
-  _scroll(body) {
+  _scroll(event, body) {
     const targetHash = event.currentTarget.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)');
     const offset     = $(targetHash).eq(0).offset();
 
@@ -73,7 +73,7 @@ export default class SmoothScroll {
           return;
         }
 
-        this._scroll(body);
+        this._scroll(event, body);
         this._disableMouseWheel(body);
       });
     });
