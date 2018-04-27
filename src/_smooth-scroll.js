@@ -34,9 +34,16 @@ export default class SmoothScroll {
       return;
     }
 
+    let scrollOffset = 0;
+    if (typeof this.params.offset === 'function') {
+      scrollOffset = this.params.offset();
+    } else {
+      scrollOffset = this.params.offset;
+    }
+
     body.animate(
       {
-        scrollTop: offset.top - this.params.offset
+        scrollTop: offset.top - scrollOffset
       },
       this.params.duration,
       this.params.easing,
