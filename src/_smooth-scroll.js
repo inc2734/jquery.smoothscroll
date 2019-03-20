@@ -73,6 +73,13 @@ export default class SmoothScroll {
   on() {
     $(this.target).each((i, e) => {
       $(e).on('click.SmoothScroll', (event) => {
+        const targetPermalink   = event.currentTarget.href.split('#')[0];
+        const locationPermalink = window.location.href.split('#')[0];
+
+        if (targetPermalink !== locationPermalink) {
+          return true;
+        }
+
         event.preventDefault();
 
         const body = this._getTargetBody();
