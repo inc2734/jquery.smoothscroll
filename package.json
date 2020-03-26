@@ -1,6 +1,6 @@
 {
   "name": "jquery.smoothscroll",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "inc2734",
   "license": "MIT",
   "repository": {
@@ -23,14 +23,14 @@
     "webpack.config.js"
   ],
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-loader": "^8.0.5",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "rimraf": "^2.6.3",
-    "browser-sync": "^2.26.3",
-    "cpy-cli": "^2.0.0"
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "rimraf": "^3.0.2",
+    "browser-sync": "^2.26.7",
+    "cpy-cli": "^3.1.0"
   },
   "scripts": {
     "browsersync": "browser-sync start -s 'dist' -f 'dist'",

@@ -59,7 +59,8 @@
 <script src="jquery.smoothscroll.min.js"></script>
 <script>
 jQuery(function($) {
-  $('a[href^="#"]').SmoothScroll({
+  $(document).SmoothScroll({
+    target  : 'a[href^="#"]',
     duration: 1000,
     easing  : 'easeOutQuint'
   });

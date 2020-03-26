@@ -11,19 +11,26 @@
 'use strict';
 
 import $ from 'jquery';
-import SmoothScroll from './_smooth-scroll.js';
+import { apply } from './apply';
 
 ;(function($) {
   const methods = {
     init: function(params) {
-      const _SmoothScroll = new SmoothScroll(this, params);
-      _SmoothScroll.on();
+      $(document).on(
+        'click.SmoothScroll',
+        params.target,
+        (event) => {
+          event.preventDefault();
+
+          params.currentTarget = event.currentTarget;
+          apply(params);
+        }
+      );
       return this;
     },
 
-    off: function() {
-      const _SmoothScroll = new SmoothScroll(this);
-      _SmoothScroll.off();
+    off: function(params) {
+      $(document).off('click.SmoothScroll', params.target);
       return this;
     }
   }

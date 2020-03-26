@@ -20,7 +20,8 @@ $ yarn add jquery.smoothscroll
 ```
 <script>
 jQuery(function($) {
-  $('a[href^="#"]').SmoothScroll({
+  $(document).SmoothScroll({
+    target  : 'a[href^="#"]',
     duration: 1000,
     easing  : 'easeOutQuint'
   });
