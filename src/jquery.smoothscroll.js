@@ -20,10 +20,8 @@ import { apply } from './apply';
         'click.SmoothScroll',
         params.target,
         (event) => {
-          event.preventDefault();
-
           params.currentTarget = event.currentTarget;
-          apply(params);
+          apply(event, params);
         }
       );
       return this;

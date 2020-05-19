@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export function apply(params = {}) {
+export function apply(event, params = {}) {
   const defaults = {
     target  : undefined,
     duration: 1000,
@@ -35,14 +35,14 @@ export function apply(params = {}) {
 
   const body = getTargetBody();
   if (! body) {
-    return;
+    return true;
   }
 
   const targetHash = settings.currentTarget.hash.split('%').join('\\%').split('(').join('\\(').split(')').join('\\)');
   const offset     = $(targetHash).eq(0).offset();
 
   if (! targetHash || ! offset) {
-    return
+    return true;
   }
 
   const scroll = () => {
@@ -73,6 +73,8 @@ export function apply(params = {}) {
       body.stop(true);
     };
   };
+
+  event.preventDefault();
 
   scroll();
   disableMouseWheel();
